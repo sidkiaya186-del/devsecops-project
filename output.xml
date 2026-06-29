@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.13.3 on win32)" generated="2026-06-29T10:44:01.903221" rpa="false" schemaversion="5">
+<suite id="s1" name="Api Tests" source="C:\Users\sidki\OneDrive\Bureau\security-testing-framework\.github\workflows\devsecops-project\tests\api_tests.robot">
+<test id="s1-t1" name="Création d'un utilisateur" line="9">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-06-29T10:44:02.480629" level="INFO">Creating Session using : alias=api, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-06-29T10:44:02.480239" elapsed="0.000917"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-06-29T10:44:02.482574" level="INFO">${body} = {'username': 'testuser', 'password': 'password123'}</msg>
+<var>${body}</var>
+<arg>username=testuser</arg>
+<arg>password=password123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-06-29T10:44:02.481835" elapsed="0.000798"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-06-29T10:44:02.502051" level="INFO">POST Request : url=http://127.0.0.1:5000/register 
+ path_url=/register 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "testuser", "password": "password123"}' 
+ </msg>
+<msg time="2026-06-29T10:44:02.502229" level="INFO">POST Response : url=http://127.0.0.1:5000/register 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.8 Python/3.13.3', 'Date': 'Mon, 29 Jun 2026 09:44:02 GMT', 'Content-Type': 'application/json', 'Content-Length': '63', 'Connection': 'close'} 
+ body={
+  "message": "Utilisateur cr\u00e9\u00e9 avec succ\u00e8s"
+}
+ 
+ </msg>
+<msg time="2026-06-29T10:44:02.502430" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api</arg>
+<arg>/register</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-06-29T10:44:02.484256" elapsed="0.018226"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-29T10:44:02.504698" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-29T10:44:02.503494" elapsed="0.001342"/>
+</kw>
+<status status="PASS" start="2026-06-29T10:44:02.478030" elapsed="0.027185"/>
+</test>
+<test id="s1-t2" name="Connexion utilisateur" line="24">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-06-29T10:44:02.507466" level="INFO">Creating Session using : alias=api, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-06-29T10:44:02.506766" elapsed="0.000891"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-06-29T10:44:02.508620" level="INFO">${body} = {'username': 'testuser', 'password': 'password123'}</msg>
+<var>${body}</var>
+<arg>username=testuser</arg>
+<arg>password=password123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-06-29T10:44:02.508044" elapsed="0.000621"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-06-29T10:44:02.514064" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "testuser", "password": "password123"}' 
+ </msg>
+<msg time="2026-06-29T10:44:02.514158" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.8 Python/3.13.3', 'Date': 'Mon, 29 Jun 2026 09:44:02 GMT', 'Content-Type': 'application/json', 'Content-Length': '42', 'Connection': 'close'} 
+ body={
+  "message": "Connexion r\u00e9ussie"
+}
+ 
+ </msg>
+<msg time="2026-06-29T10:44:02.514321" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>api</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-06-29T10:44:02.508967" elapsed="0.005385"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-29T10:44:02.515511" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-29T10:44:02.514716" elapsed="0.000897"/>
+</kw>
+<status status="PASS" start="2026-06-29T10:44:02.506024" elapsed="0.009920"/>
+</test>
+<status status="PASS" start="2026-06-29T10:44:01.906219" elapsed="0.611266"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Api Tests" id="s1" pass="2" fail="0" skip="0">Api Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
